@@ -1,0 +1,83 @@
+/* ── Login ── */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 0.8rem;
+}
+
+.login-page h1 {
+  font-size: 3rem;
+  color: #f5c518;
+  margin: 0;
+}
+
+.login-page p {
+  color: #aaa;
+  margin: 0 0 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 300px;
+}
+
+.login-form input {
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login-form button {
+  padding: 0.7rem;
+  background: #f5c518;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background: #e6b800;
+}
+
+/* ── Search bar ── */
+.search-bar {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar input {
+  padding: 0.6rem 1rem;
+  width: 300px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  padding: 0.6rem 1.4rem;
+  background: #f5c518;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background: #e6b800;
+}

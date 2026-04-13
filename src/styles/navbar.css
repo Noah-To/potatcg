@@ -1,0 +1,55 @@
+/* ── Navbar ── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  background: #1a1a2e;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f5c518;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar-links a:hover {
+  color: #f5c518;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.navbar-user button {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px solid #555;
+  color: #ccc;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.navbar-user button:hover {
+  border-color: #f5c518;
+  color: #f5c518;
+}

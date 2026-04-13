@@ -1,0 +1,22 @@
+/* ── Layout ── */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ── Page wrapper ── */
+.page {
+  padding: 2rem;
+}
+
+/* ── Feedback messages ── */
+.error {
+  color: #ff6b6b;
+  margin: 0.5rem 0;
+}
+
+.success {
+  color: #69db7c;
+  margin: 0.5rem 0;
+}
