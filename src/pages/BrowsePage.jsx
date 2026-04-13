@@ -14,8 +14,10 @@ function BrowsePage() {
   const { cards, loading, error, search } = useCards()
 
   const handleSearch = (e) => {
-    e.preventDefault()
-    search(query.trim())
+  e.preventDefault()
+  const trimmed = query.trim()
+  if (!trimmed) return
+  search(trimmed)
   }
 
   const handleAdd = async (card) => {
