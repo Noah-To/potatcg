@@ -1,7 +1,7 @@
 /* ── Navbar ── */
 .navbar {
   display: flex;
-  align-items: center;
+  align-items: flex;
   justify-content: space-between;
   padding: 0.8rem 2rem;
   background: #1a1a2e;
