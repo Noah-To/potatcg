@@ -2,17 +2,14 @@ const BACKEND = 'http://localhost:3001'
 
 const cache = new Map()
 
-export async function searchCards(q = '', setId = '') {
+export async function searchSets(q = '') {
   const trimmedQ = q.trim()
-  const trimmedSetId = setId.trim()
-  const key = `cards:${trimmedQ.toLowerCase()}:${trimmedSetId.toLowerCase()}`
+  const key = `sets:${trimmedQ.toLowerCase()}`
 
   if (cache.has(key)) return cache.get(key)
 
-  let url = `${BACKEND}/cards?pageSize=20`
-
+  let url = `${BACKEND}/sets?pageSize=50`
   if (trimmedQ) url += `&q=${encodeURIComponent(trimmedQ)}`
-  if (trimmedSetId) url += `&setId=${encodeURIComponent(trimmedSetId)}`
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)

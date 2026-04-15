@@ -1,26 +1,27 @@
 import { useState, useCallback, useRef } from 'react'
-import { searchCards } from '../api/cardsApi'
+import { searchSets } from '../api/setsApi'
 
-export function useCards() {
-  const [cards, setCards] = useState([])
+export function useSets() {
+  const [sets, setSets] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const latestRequestRef = useRef(0)
 
-  const search = useCallback(async (q = '', setId = '') => {
+  const search = useCallback(async (q = '') => {
+    const trimmed = q.trim()
     const requestId = ++latestRequestRef.current
 
     setLoading(true)
     setError(null)
 
     try {
-      const data = await searchCards(q, setId)
+      const data = await searchSets(trimmed)
       if (requestId === latestRequestRef.current) {
-        setCards(data)
+        setSets(data)
       }
     } catch (err) {
       if (requestId === latestRequestRef.current) {
-        setError(`Failed to load cards. ${err.message}`)
+        setError(`Failed to load sets. ${err.message}`)
       }
     } finally {
       if (requestId === latestRequestRef.current) {
@@ -29,5 +30,5 @@ export function useCards() {
     }
   }, [])
 
-  return { cards, loading, error, search }
+  return { sets, loading, error, search }
 }

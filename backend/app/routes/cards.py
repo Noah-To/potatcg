@@ -1,9 +1,15 @@
 from fastapi import APIRouter
-from app.services.pokemon_api import fetch_cards
+from app.services.pokemon_api import fetch_cards, fetch_sets
 
 router = APIRouter()
 
 
 @router.get("/cards")
-async def search_cards(q: str = "", pageSize: int = 20):
-    return await fetch_cards(q, pageSize)
+async def search_cards(q: str = "", pageSize: int = 20, setId: str | None = None):
+    return await fetch_cards(q, pageSize, setId)
+
+
+@router.get("/sets")
+async def search_sets(q: str = "", pageSize: int = 50):
+    return await fetch_sets(q, pageSize)
+
