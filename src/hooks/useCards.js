@@ -7,14 +7,14 @@ export function useCards() {
   const [error, setError] = useState(null)
   const latestRequestRef = useRef(0)
 
-  const search = useCallback(async (q = '', setId = '') => {
+  const search = useCallback(async (q = '', setId = '', page = 1) => {
     const requestId = ++latestRequestRef.current
 
     setLoading(true)
     setError(null)
 
     try {
-      const data = await searchCards(q, setId)
+      const data = await searchCards(q, setId, page)
       if (requestId === latestRequestRef.current) {
         setCards(data)
       }

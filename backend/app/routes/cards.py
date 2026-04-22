@@ -5,8 +5,8 @@ router = APIRouter()
 
 
 @router.get("/cards")
-async def search_cards(q: str = "", pageSize: int = 20, setId: str | None = None):
-    return await fetch_cards(q, pageSize, setId)
+async def search_cards(q: str = "", pageSize: int = 20, page: int = 1, setId: str | None = None):
+    return await fetch_cards(q, pageSize, page, setId)
 
 
 @router.get("/sets")

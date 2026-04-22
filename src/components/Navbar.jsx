@@ -13,11 +13,13 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <span className="navbar-brand">PotaTCG</span>
+      <Link to="/" className="navbar-brand">PotaTCG</Link>
+
       <div className="navbar-links">
         <Link to="/">Browse</Link>
         <Link to="/collection">My Collection</Link>
       </div>
+
       <div className="navbar-user">
         <span>{user}</span>
         <button onClick={handleLogout}>Logout</button>

@@ -21,6 +21,7 @@ function CollectionPage() {
               <img src={card.image} alt={card.name} />
               <p>{card.name}</p>
               <small>{card.set_name}</small>
+              <small>Qty: {card.quantity ?? 1}</small>
               <button className="remove-btn" onClick={() => remove(card.id)}>
                 Remove
               </button>

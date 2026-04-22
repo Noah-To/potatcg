@@ -17,6 +17,7 @@ export async function addCard(username, card) {
       set_name: card.set?.name ?? '',
     }),
   })
+
   if (!res.ok) throw new Error(`API error ${res.status}`)
   return res.json()
 }

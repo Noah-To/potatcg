@@ -2,9 +2,9 @@ import httpx
 from urllib.parse import quote
 from app.core.config import TCG_API_KEY, TCG_API_BASE
 
-async def fetch_cards(q: str = "", page_size: int = 20, set_id: str | None = None) -> dict:
+async def fetch_cards(q: str = "", page_size: int = 20, page: int = 1, set_id: str | None = None) -> dict:
     cleaned_q = q.strip()
-    url = f"{TCG_API_BASE}/cards?pageSize={page_size}"
+    url = f"{TCG_API_BASE}/cards?pageSize={page_size}&page={page}"
 
     query_parts = []
 
