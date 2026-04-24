@@ -5,7 +5,7 @@ const cache = new Map()
 export async function searchCards(q = '', setId = '', page = 1) {
   const trimmedQ = q.trim()
   const trimmedSetId = setId.trim()
-  const key = `cards:${trimmedQ.toLowerCase()}:${trimmedSetId.toLowerCase()}`
+  const key = `cards:${trimmedQ.toLowerCase()}:${trimmedSetId.toLowerCase()}:${page}`
 
   if (cache.has(key)) return cache.get(key)
 
@@ -23,8 +23,9 @@ export async function searchCards(q = '', setId = '', page = 1) {
     if (!res.ok) throw new Error(`API error ${res.status}`)
 
     const data = await res.json()
-    cache.set(key, data.data)
-    return data.data
+    const result = { cards: data.data ?? [], totalCount: data.totalCount ?? 0 }
+    cache.set(key, result)
+    return result
   } catch (err) {
     if (err.name === 'AbortError') {
       throw new Error('Request timed out')

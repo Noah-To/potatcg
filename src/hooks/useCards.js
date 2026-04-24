@@ -3,6 +3,7 @@ import { searchCards } from '../api/cardsApi'
 
 export function useCards() {
   const [cards, setCards] = useState([])
+  const [totalCount, setTotalCount] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const latestRequestRef = useRef(0)
@@ -16,7 +17,8 @@ export function useCards() {
     try {
       const data = await searchCards(q, setId, page)
       if (requestId === latestRequestRef.current) {
-        setCards(data)
+        setCards(data.cards)
+        setTotalCount(data.totalCount)
       }
     } catch (err) {
       if (requestId === latestRequestRef.current) {
@@ -29,5 +31,5 @@ export function useCards() {
     }
   }, [])
 
-  return { cards, loading, error, search }
+  return { cards, totalCount, loading, error, search }
 }

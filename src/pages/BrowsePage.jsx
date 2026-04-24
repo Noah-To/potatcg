@@ -17,7 +17,7 @@ function BrowsePage() {
   const [selectedSet, setSelectedSet] = useState(null)
 
   const { user } = useAuth()
-  const { cards, loading: cardsLoading, error: cardsError, search: searchCards } = useCards()
+  const { cards, totalCount, loading: cardsLoading, error: cardsError, search: searchCards } = useCards()
   const { sets, loading: setsLoading, error: setsError, search: searchSets } = useSets()
 
   useEffect(() => {
@@ -120,7 +120,7 @@ function BrowsePage() {
             Previous
           </ActionButton>
           <span>Page {page}</span>
-          <ActionButton variant="secondary" onClick={handleNextPage}>
+          <ActionButton variant="secondary" onClick={handleNextPage} disabled={page * 20 >= totalCount}>
             Next
           </ActionButton>
         </div>
