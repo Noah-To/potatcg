@@ -1,6 +1,7 @@
 import { useAuth } from '../hooks/useAuth'
 import { useCollection } from '../hooks/useCollection'
 import LoadingState from '../components/LoadingState'
+import ActionButton from '../components/ActionButton'
 import '../styles/cards.css'
 
 function CollectionPage() {
@@ -26,8 +27,8 @@ function CollectionPage() {
                <small>{card.set_name}</small>
 
           <div className="card-actions">
-             <button className="action-btn" onClick={() => add(card)}> +1 </button>
-             <button className="remove-btn" onClick={() => remove(card.id)}>-1</button>
+            <ActionButton variant="primary" onClick={() => add(card)}>+1</ActionButton>
+            <ActionButton variant="danger" onClick={() => remove(card.id)}>-1</ActionButton>
           </div>
         </div>
           ))}

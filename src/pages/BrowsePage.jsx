@@ -3,6 +3,7 @@ import CardItem from '../components/CardItem'
 import SetItem from '../components/SetItem'
 import SearchBar from '../components/SearchBar'
 import ErrorMessage from '../components/ErrorMessage'
+import ActionButton from '../components/ActionButton'
 import { useAuth } from '../hooks/useAuth'
 import { useCards } from '../hooks/useCards'
 import { useSets } from '../hooks/useSets'
@@ -87,9 +88,9 @@ function BrowsePage() {
         />
 
         {selectedSet && (
-          <button type="button" className="secondary-btn" onClick={handleBackToSets}>
+          <ActionButton variant="secondary" onClick={handleBackToSets}>
             Back to sets
-          </button>
+          </ActionButton>
         )}
       </div>
 
@@ -115,13 +116,13 @@ function BrowsePage() {
 
       {selectedSet && (
         <div className="pagination-row">
-          <button type="button" className="secondary-btn" onClick={handlePrevPage} disabled={page === 1}>
+          <ActionButton variant="secondary" onClick={handlePrevPage} disabled={page === 1}>
             Previous
-          </button>
+          </ActionButton>
           <span>Page {page}</span>
-          <button type="button" className="secondary-btn" onClick={handleNextPage}>
+          <ActionButton variant="secondary" onClick={handleNextPage}>
             Next
-          </button>
+          </ActionButton>
         </div>
       )}
     </div>

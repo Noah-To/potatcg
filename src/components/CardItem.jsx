@@ -1,3 +1,4 @@
+import ActionButton from './ActionButton'
 import '../styles/cards.css'
 
 function CardItem({ card, onAction, actionLabel }) {
@@ -6,9 +7,9 @@ function CardItem({ card, onAction, actionLabel }) {
       <img src={card.images.small} alt={card.name} />
       <p>{card.name}</p>
       <small>{card.set?.name}</small>
-      <button className="action-btn" onClick={onAction}>
+      <ActionButton variant="primary" onClick={onAction}>
         {actionLabel}
-      </button>
+      </ActionButton>
     </div>
   )
 }
