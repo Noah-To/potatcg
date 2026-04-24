@@ -125,6 +125,18 @@
   color: #000;
 }
 
+.qty-badge {
+  margin-left: 0.35rem;
+  color: #f5c518;
+  font-weight: 700;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
 @media (max-width: 700px) {
   .cards-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
