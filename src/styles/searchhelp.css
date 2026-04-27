@@ -1,0 +1,181 @@
+/* ── Search Help ── */
+.search-help {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.search-help-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #777;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  transition: border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.search-help-btn:hover,
+.search-help-btn.active {
+  border-color: #f5c518;
+  color: #f5c518;
+}
+
+/* ── Bubble — positioned LEFT of the ? button on wide screens ── */
+.search-help-bubble {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;            /* top of bubble aligns with ? button center */
+  transform: none;
+  width: 240px;
+  background: #1e1e2e;
+  border: 2px solid #4a4a6a;
+  border-radius: 14px;
+  padding: 1rem;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6);
+}
+
+/* Outer tail — border colour, right-pointing triangle */
+.search-help-bubble::before {
+  content: '';
+  position: absolute;
+  right: -15px;
+  top: 0;              /* tip lands at button center = bubble top */
+  transform: none;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid #4a4a6a;
+}
+
+/* Inner tail — background colour, sits in front of outer */
+.search-help-bubble::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 3px;            /* matches outer tail tip position */
+  transform: none;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 12px solid #1e1e2e;
+}
+
+.search-help-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f5c518;
+}
+
+.search-help-tip {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #ccc;
+  line-height: 1.45;
+}
+
+.search-help-examples-label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #888;
+}
+
+.search-help-examples {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.search-help-examples li {
+  font-size: 0.8rem;
+  color: #e0e0e0;
+  line-height: 1.4;
+}
+
+.search-help-examples li::before {
+  content: '→ ';
+  color: #f5c518;
+}
+
+.search-help-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+}
+
+.search-help-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #333;
+  padding-top: 0.5rem;
+  gap: 0.5rem;
+}
+
+.search-help-nav span {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+.search-help-nav button {
+  background: transparent;
+  border: 1px solid #555;
+  color: #ccc;
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.search-help-nav button:hover:not(:disabled) {
+  border-color: #f5c518;
+  color: #f5c518;
+}
+
+.search-help-nav button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Narrow screens: full-width panel anchored to the bottom ── */
+@media (max-width: 999px) {
+  .search-help-bubble {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    transform: none;
+    border-radius: 14px 14px 0 0;
+    border-bottom-width: 0;
+    max-height: 55vh;
+    overflow-y: auto;
+  }
+
+  .search-help-bubble::before,
+  .search-help-bubble::after {
+    display: none;
+  }
+}

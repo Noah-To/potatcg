@@ -8,14 +8,13 @@ export function useSets() {
   const latestRequestRef = useRef(0)
 
   const search = useCallback(async (q = '') => {
-    const trimmed = q.trim()
     const requestId = ++latestRequestRef.current
 
     setLoading(true)
     setError(null)
 
     try {
-      const data = await searchSets(trimmed)
+      const data = await searchSets(q)
       if (requestId === latestRequestRef.current) {
         setSets(data)
       }

@@ -50,34 +50,140 @@
   background: #e6b800;
 }
 
-/* ── Search bar ── */
-.search-bar {
+/* ── Landing page buttons ── */
+.landing-buttons {
   display: flex;
-  gap: 0.6rem;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-.search-bar input {
-  padding: 0.6rem 1rem;
+  flex-direction: column;
+  gap: 0.8rem;
   width: 300px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 1rem;
 }
 
-.search-bar button {
-  padding: 0.6rem 1.4rem;
+.landing-btn-primary {
+  padding: 0.8rem;
   background: #f5c518;
   color: #000;
   border: none;
   border-radius: 6px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
 }
 
-.search-bar button:hover {
+.landing-btn-primary:hover {
   background: #e6b800;
+}
+
+.landing-btn-secondary {
+  padding: 0.8rem;
+  background: transparent;
+  color: #f5c518;
+  border: 2px solid #f5c518;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.landing-btn-secondary:hover {
+  background: rgba(245, 197, 24, 0.1);
+}
+
+/* ── Password row (input + ? button) ── */
+.password-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.password-input-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrap input {
+  width: 100%;
+  padding-right: 4rem;
+}
+
+.pw-show-btn {
+  position: absolute;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.pw-show-btn:hover {
+  color: #f5c518;
+}
+
+.pw-hint-btn {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid #777;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.pw-hint-btn:hover,
+.pw-hint-btn.active {
+  border-color: #f5c518;
+  color: #f5c518;
+}
+
+/* ── Password hint box ── */
+.pw-hint-box {
+  background: #1e1e2e;
+  border: 1px solid #4a4a6a;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+}
+
+.pw-hint-box p {
+  margin: 0 0 0.4rem;
+  color: #f5c518;
+  font-weight: 600;
+}
+
+.pw-hint-box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* ── Link-style button (already have an account?) ── */
+.link-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+}
+
+.link-btn:hover {
+  color: #f5c518;
 }

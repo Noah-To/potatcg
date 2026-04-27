@@ -1,6 +1,7 @@
 import { useAuth } from '../hooks/useAuth'
 import { useCollection } from '../hooks/useCollection'
 import LoadingState from '../components/LoadingState'
+import ErrorMessage from '../components/ErrorMessage'
 import ActionButton from '../components/ActionButton'
 import '../styles/cards.css'
 
@@ -13,7 +14,7 @@ function CollectionPage() {
 
   return (
     <>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <ErrorMessage message={error} />
     <div className="page">
       <h2>My Collection ({totalCards} cards)</h2>
       {cards.length === 0 ? (

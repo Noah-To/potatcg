@@ -1,4 +1,4 @@
-const BACKEND = 'http://localhost:3001'
+import { BACKEND } from './config'
 
 export async function getCollection(username) {
   const res = await fetch(`${BACKEND}/collection/${username}`)

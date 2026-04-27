@@ -8,15 +8,15 @@ function Navbar() {
 
   const handleLogout = () => {
     logout()
-    navigate('/login')
+    navigate('/')
   }
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-brand">PotaTCG</Link>
+      <Link to="/browse" className="navbar-brand">PotaTCG</Link>
 
       <div className="navbar-links">
-        <Link to="/">Browse</Link>
+        <Link to="/browse">Browse</Link>
         <Link to="/collection">My Collection</Link>
       </div>
 

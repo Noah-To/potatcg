@@ -1,0 +1,64 @@
+{
+  "matthew": {
+    "salt": "4d1a295f6c43a484540519d47f8bea9e",
+    "password_hash": "90e37dfecf36914f754ed0711f9fa1ee0a508af5272a94f80f78a54a37891176",
+    "collection": [
+      {
+        "id": "me2pt5-2",
+        "name": "Erika's Gloom",
+        "image": "https://images.scrydex.com/pokemon/me2pt5-2/small",
+        "set_name": "Ascended Heroes",
+        "quantity": 1
+      },
+      {
+        "id": "me2pt5-3",
+        "name": "Erika's Vileplume ex",
+        "image": "https://images.scrydex.com/pokemon/me2pt5-3/small",
+        "set_name": "Ascended Heroes",
+        "quantity": 2
+      },
+      {
+        "id": "me2pt5-4",
+        "name": "Erika's Bellsprout",
+        "image": "https://images.scrydex.com/pokemon/me2pt5-4/small",
+        "set_name": "Ascended Heroes",
+        "quantity": 2
+      },
+      {
+        "id": "xyp-XY24",
+        "name": "Greninja",
+        "image": "https://images.pokemontcg.io/xyp/XY24.png",
+        "set_name": "XY Black Star Promos",
+        "quantity": 1
+      },
+      {
+        "id": "sm6-24",
+        "name": "Greninja-GX",
+        "image": "https://images.pokemontcg.io/sm6/24.png",
+        "set_name": "Forbidden Light",
+        "quantity": 2
+      },
+      {
+        "id": "sm10-107",
+        "name": "Greninja & Zoroark-GX",
+        "image": "https://images.pokemontcg.io/sm10/107.png",
+        "set_name": "Unbroken Bonds",
+        "quantity": 2
+      },
+      {
+        "id": "sm6-120",
+        "name": "Greninja-GX",
+        "image": "https://images.pokemontcg.io/sm6/120.png",
+        "set_name": "Forbidden Light",
+        "quantity": 2
+      },
+      {
+        "id": "sm10-201",
+        "name": "Greninja & Zoroark-GX",
+        "image": "https://images.pokemontcg.io/sm10/201.png",
+        "set_name": "Unbroken Bonds",
+        "quantity": 1
+      }
+    ]
+  }
+}

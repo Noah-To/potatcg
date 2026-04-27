@@ -1,40 +1,35 @@
-# Module-level in-memory store — resets on server restart (prototype only)
-_collections: dict[str, list] = {}
+from app.services import user_service
 
 
 def get(username: str) -> list:
-    return _collections.get(username, [])
+    return user_service.get_collection(username)
 
-
-def init_user(username: str):
-    if username not in _collections:
-        _collections[username] = []
-
-
+# the function add and remove manipulates the user's collection, updating the card quantity with the use of buttons
 def add(username: str, card: dict) -> list:
-    init_user(username)
+    collection = user_service.get_collection(username)
 
-    existing = next((c for c in _collections[username] if c["id"] == card["id"]), None)
+    existing = next((c for c in collection if c["id"] == card["id"]), None)
 
     if existing:
         existing["quantity"] += 1
     else:
         card["quantity"] = 1
-        _collections[username].append(card)
+        collection.append(card)
 
-    return _collections[username]
+    user_service.save_collection(username, collection)
+    return collection
 
 
 def remove(username: str, card_id: str) -> list:
-    if username in _collections:
-        for card in _collections[username]:
-            if card["id"] == card_id:
-                if card.get("quantity", 1) > 1:
-                    card["quantity"] -= 1
-                else:
-                    _collections[username] = [
-                        c for c in _collections[username] if c["id"] != card_id
-                    ]
-                break
+    collection = user_service.get_collection(username)
 
-    return _collections.get(username, [])
+    for card in collection:
+        if card["id"] == card_id:
+            if card.get("quantity", 1) > 1:
+                card["quantity"] -= 1
+            else:
+                collection = [c for c in collection if c["id"] != card_id]
+            break
+
+    user_service.save_collection(username, collection)
+    return collection

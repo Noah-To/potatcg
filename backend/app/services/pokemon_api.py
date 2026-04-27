@@ -13,7 +13,7 @@ async def fetch_cards(q: str = "", page_size: int = 20, page: int = 1, set_id: s
 
     if cleaned_q:
         query_parts.append(
-            f'(name:"{cleaned_q}*" OR set.name:"{cleaned_q}*" OR number:"{cleaned_q}" OR id:"{cleaned_q}*")'
+            f'(name:"{cleaned_q}*" OR set.name:"{cleaned_q}*")'
         )
 
     if query_parts:
