@@ -6,7 +6,7 @@ export async function fetchWithCache(key, url) {
   if (cache.has(key)) return cache.get(key)
 
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 10000)
+  const timeout = setTimeout(() => controller.abort(), 60000)
 
   try {
     const res = await fetch(url, { signal: controller.signal })
