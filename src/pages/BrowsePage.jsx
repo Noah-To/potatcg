@@ -12,21 +12,25 @@ import '../styles/cards.css'
 
 function BrowsePage() {
   const [page, setPage] = useState(1)
+  const [setsPage, setSetsPage] = useState(1)
   const [query, setQuery] = useState('')
   const [message, setMessage] = useState(null)
   const [selectedSet, setSelectedSet] = useState(null)
+
+  //global search is when user searches for a pokemon without selecting the set
   const [globalSearch, setGlobalSearch] = useState(false)
   const [searchError, setSearchError] = useState(null)
   const isCompoundSearch = useRef(false)
 
   const { user } = useAuth()
   const { cards, totalCount, loading: cardsLoading, error: cardsError, search: searchCards } = useCards()
-  const { sets, loading: setsLoading, error: setsError, search: searchSets } = useSets()
+  const { sets, totalCount: setsTotalCount, loading: setsLoading, error: setsError, search: searchSets } = useSets()
 
   useEffect(() => {
-    searchSets('')
+    searchSets('', 1)
   }, [searchSets])
 
+  // checking for compounded search before handling other types of seearches
   useEffect(() => {
     if (!cardsLoading && isCompoundSearch.current) {
       if (cards.length === 0) {
@@ -51,11 +55,13 @@ function BrowsePage() {
 
     if (!trimmed) {
       setGlobalSearch(false)
-      searchSets('')
+      setSetsPage(1)
+      searchSets('', 1)
       return
     }
 
-    // Try compound: set name + card name or number in any order
+    // this is compound search or combined search, where the set name + pokemon
+    // name or set name are in the same search string
     const compound = parseCompoundQuery(trimmed, sets)
     if (compound) {
       isCompoundSearch.current = true
@@ -66,7 +72,6 @@ function BrowsePage() {
       return
     }
 
-    // Normal global search
     searchSets(trimmed)
     searchCards(trimmed, '', 1)
     setGlobalSearch(true)
@@ -86,7 +91,21 @@ function BrowsePage() {
     isCompoundSearch.current = false
     setQuery('')
     setPage(1)
-    searchSets('')
+    setSetsPage(1)
+    searchSets('', 1)
+  }
+
+  const handleSetsNextPage = () => {
+    const next = setsPage + 1
+    setSetsPage(next)
+    searchSets(query.trim(), next)
+  }
+
+  const handleSetsPrevPage = () => {
+    if (setsPage === 1) return
+    const prev = setsPage - 1
+    setSetsPage(prev)
+    searchSets(query.trim(), prev)
   }
 
   const handleNextPage = () => {
@@ -141,11 +160,24 @@ function BrowsePage() {
       <ErrorMessage message={searchError ?? cardsError ?? setsError} />
 
       {!selectedSet && !globalSearch && (
-        <div className="cards-grid">
-          {sets.map(set => (
-            <SetItem key={set.id} set={set} onClick={handleSetClick} />
-          ))}
-        </div>
+        <>
+          <div className="cards-grid">
+            {sets.map(set => (
+              <SetItem key={set.id} set={set} onClick={handleSetClick} />
+            ))}
+          </div>
+          {setsTotalCount > 20 && (
+            <div className="pagination-row">
+              <ActionButton variant="secondary" onClick={handleSetsPrevPage} disabled={setsPage === 1}>
+                Previous
+              </ActionButton>
+              <span>Page {setsPage}</span>
+              <ActionButton variant="secondary" onClick={handleSetsNextPage} disabled={setsPage * 20 >= setsTotalCount}>
+                Next
+              </ActionButton>
+            </div>
+          )}
+        </>
       )}
 
       {!selectedSet && globalSearch && (
@@ -204,7 +236,8 @@ function BrowsePage() {
 }
 
 // getting the partial set name + card from a compound search string.
-// change the words into lowercase, trim whitespace and split them into parts to match prefixes of the set and pokemon names
+// change the words into lowercase, trim whitespace and split them into parts
+//  to match prefixes of the set and pokemon names
 function parseCompoundQuery(query, sets) {
   const words = query.toLowerCase().trim().split(/\s+/)
   if (words.length < 2) return null

@@ -10,6 +10,6 @@ async def search_cards(q: str = "", pageSize: int = 20, page: int = 1, setId: st
 
 
 @router.get("/sets")
-async def search_sets(q: str = "", pageSize: int = 50):
-    return await fetch_sets(q, pageSize)
+async def search_sets(q: str = "", pageSize: int = 20, page: int = 1):
+    return await fetch_sets(q, pageSize, page)
 

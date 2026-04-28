@@ -28,8 +28,8 @@ async def fetch_cards(q: str = "", page_size: int = 20, page: int = 1, set_id: s
         return res.json()
 
 
-async def fetch_sets(q: str = "", page_size: int = 50) -> dict:
-    url = f"{TCG_API_BASE}/sets?pageSize={page_size}&orderBy=-releaseDate"
+async def fetch_sets(q: str = "", page_size: int = 20, page: int = 1) -> dict:
+    url = f"{TCG_API_BASE}/sets?pageSize={page_size}&page={page}&orderBy=-releaseDate"
 
     if q.strip():
         url += f"&q={quote(f'name:\"{q.strip()}*\"')}"

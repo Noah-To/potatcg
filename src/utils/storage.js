@@ -1,4 +1,5 @@
 const KEY = 'potatcg_user'
+const DISPLAY_KEY = 'potatcg_display'
 
 export function getUser() {
   try {
@@ -20,6 +21,23 @@ export function setUser(username) {
 export function clearUser() {
   try {
     localStorage.removeItem(KEY)
+    localStorage.removeItem(DISPLAY_KEY)
+  } catch {
+
+  }
+}
+
+export function getDisplayName() {
+  try {
+    return localStorage.getItem(DISPLAY_KEY) || null
+  } catch {
+    return null
+  }
+}
+
+export function setDisplayName(name) {
+  try {
+    localStorage.setItem(DISPLAY_KEY, name)
   } catch {
 
   }

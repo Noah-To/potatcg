@@ -26,6 +26,8 @@ export function useCollection(username) {
       .finally(() => setLoading(false))
   }, [username])
 
+  // prevent multiple simultaneous add or remove operations
+  // by using a reference track to see if there is already a request in progess
   const add = async (card) => {
     if (busy.current) return
     busy.current = true

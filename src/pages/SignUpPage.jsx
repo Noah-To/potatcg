@@ -4,11 +4,13 @@ import { useAuth } from '../hooks/useAuth'
 import { registerUser } from '../api/authApi'
 import '../styles/forms.css'
 
-// At least 12 chars, 1 uppercase, 1 number, 1 symbol, no whitespace
+// password must be at least 12 chars, 1 uppercase, 1 number, 1 symbol, no whitespace
+// a regex to check 
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{12,}$/
 
 function SignUpPage() {
   const [username, setUsername] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [password, setPassword] = useState('')
   const [showHint, setShowHint] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -18,6 +20,9 @@ function SignUpPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
 
+  // handle the login, validating the password with regex and 
+  // check for whitespaces in the username catches error before 
+  // sending the request to the server
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (loading) return
@@ -33,8 +38,9 @@ function SignUpPage() {
     setError(null)
 
     try {
-      const data = await registerUser(trimmed, password)
-      login(data.username)
+      const trimmedDisplay = displayName.trim() || trimmed
+      const data = await registerUser(trimmed, password, trimmedDisplay)
+      login(data.username, data.display_name)
       navigate('/browse')
     } catch (err) {
       setError(err.message || 'Could not connect to server.')
@@ -51,11 +57,19 @@ function SignUpPage() {
       <form onSubmit={handleSubmit} className="login-form">
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Username (used to log in)"
           value={username}
           onChange={e => setUsername(e.target.value)}
           disabled={loading}
           required
+        />
+
+        <input
+          type="text"
+          placeholder="Display name (shown in the app)"
+          value={displayName}
+          onChange={e => setDisplayName(e.target.value)}
+          disabled={loading}
         />
 
         <div className="password-row">

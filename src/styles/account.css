@@ -1,0 +1,168 @@
+/* ── Account Settings Page ── */
+.account-page {
+  max-width: 640px;
+}
+
+.account-page h1 {
+  font-size: 2rem;
+  color: #f5c518;
+  margin: 0 0 0.3rem;
+}
+
+.account-subtitle {
+  color: #aaa;
+  margin: 0 0 2rem;
+}
+
+.account-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.account-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ddd;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.account-section-note {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+
+/* Matches browse page search-bar style */
+.account-field-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.account-field-row input,
+.account-password-form input {
+  padding: 0.6rem 1rem;
+  width: 300px;
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.account-field-row button,
+.account-password-form .account-field-row button {
+  padding: 0.6rem 1.4rem;
+  background: #f5c518;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.account-field-row button:hover,
+.account-password-form .account-field-row button:hover {
+  background: #e6b800;
+}
+
+.account-field-row button:disabled,
+.account-password-form .account-field-row button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.account-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ── Danger Zone ── */
+.account-danger-zone {
+  border-bottom: none;
+}
+
+.account-danger-zone h2 {
+  color: #ff6b6b;
+}
+
+.account-danger-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.account-danger-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.account-danger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.account-danger-info strong {
+  color: #eee;
+  font-size: 0.95rem;
+}
+
+.account-danger-info span {
+  color: #888;
+  font-size: 0.82rem;
+}
+
+.account-danger-delete {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.account-danger-delete input {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.btn-danger {
+  padding: 0.6rem 1.4rem;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-danger:hover {
+  background: #e74c3c;
+}
+
+.btn-danger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.account-danger-warning {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin: 0;
+}

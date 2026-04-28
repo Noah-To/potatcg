@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth'
 import '../styles/navbar.css'
 
 function Navbar() {
-  const { user, logout } = useAuth()
+  const { displayName, logout } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -21,7 +21,7 @@ function Navbar() {
       </div>
 
       <div className="navbar-user">
-        <span>{user}</span>
+        <Link to="/account" className="navbar-username">{displayName}</Link>
         <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>

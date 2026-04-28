@@ -5,6 +5,7 @@ const cache = new Map()
 export async function fetchWithCache(key, url) {
   if (cache.has(key)) return cache.get(key)
 
+// cancel request if it takes a minute to respond, catches this by throwing error
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 60000)
 

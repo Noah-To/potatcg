@@ -7,6 +7,7 @@ import '../styles/forms.css'
 function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -26,7 +27,7 @@ function LoginPage() {
 
     try {
       const data = await loginUser(trimmed, password)
-      login(data.username)
+      login(data.username, data.display_name)
       navigate('/browse')
     } catch (err) {
       setError(err.message || 'Could not connect to server.')
@@ -49,14 +50,27 @@ function LoginPage() {
           disabled={loading}
           required
         />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={loading}
-          required
-        />
+
+        <div className="password-row">
+          <div className="password-input-wrap">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
+              required
+            />
+            <button
+              type="button"
+              className="pw-show-btn"
+              onClick={() => setShowPassword(v => !v)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+        </div>
 
         <button type="submit" disabled={loading}>
           {loading ? 'Signing in...' : 'Log In'}
