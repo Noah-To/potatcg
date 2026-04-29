@@ -1,17 +1,17 @@
-import ActionButton from './ActionButton'
+import Button from './ActionButton'
 import '../styles/cards.css'
 
-function CardItem({ card, onAction, actionLabel }) {
+function Card({ card, onAction, actionLabel }) {
   return (
-    <div className="card-item">
+    <div className="card">
       <img src={card.images.small} alt={card.name} />
       <p>{card.name}</p>
       <small>{card.set?.name}</small>
-      <ActionButton variant="primary" onClick={onAction}>
+      <Button variant="primary" onClick={onAction}>
         {actionLabel}
-      </ActionButton>
+      </Button>
     </div>
   )
 }
 
-export default CardItem
+export default Card

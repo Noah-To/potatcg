@@ -1,4 +1,4 @@
-import { BACKEND, fetchWithCache } from './config'
+import { BACKEND, cacheFetch } from './config'
 
 export async function searchSets(q = '', page = 1) {
   const trimmedQ = q.trim()
@@ -7,6 +7,6 @@ export async function searchSets(q = '', page = 1) {
   let url = `${BACKEND}/sets?pageSize=20&page=${page}`
   if (trimmedQ) url += `&q=${encodeURIComponent(trimmedQ)}`
 
-  const data = await fetchWithCache(key, url)
+  const data = await cacheFetch(key, url)
   return { sets: data.data, totalCount: data.totalCount }
 }

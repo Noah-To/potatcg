@@ -1,10 +1,10 @@
-function SetItem({ set, onClick }) {
+function Set({ set, onClick }) {
   return (
-    <button type="button" className="set-card" onClick={() => onClick(set)}>
-      <div className="set-card-image">
+    <button type="button" className="set" onClick={() => onClick(set)}>
+      <div className="set-image">
         <img src={set.images?.logo} alt={set.name} />
       </div>
-      <div className="set-card-body">
+      <div className="set-body">
         <p>{set.name}</p>
         <small>{set.series}</small>
         <small>{set.total} cards</small>
@@ -13,4 +13,4 @@ function SetItem({ set, onClick }) {
   )
 }
 
-export default SetItem
+export default Set

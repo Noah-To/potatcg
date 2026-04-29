@@ -1,10 +1,10 @@
 import '../styles/forms.css'
-import SearchHelp from './SearchHelp'
+import SearchHint from './SearchHelp'
 
 function SearchBar({ query, onChange, onSubmit, loading }) {
   return (
     <div className="search-bar-wrapper">
-      <SearchHelp />
+      <SearchHint />
       <form onSubmit={onSubmit} className="search-bar">
         <input
           type="text"

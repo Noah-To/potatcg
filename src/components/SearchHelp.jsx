@@ -31,17 +31,17 @@ const PAGES = [
   },
 ]
 
-export default function SearchHelp() {
+export default function SearchHint() {
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(0)
 
   const current = PAGES[page]
 
   return (
-    <div className="search-help">
+    <div className="search-hint">
       <button
         type="button"
-        className={`search-help-btn${open ? ' active' : ''}`}
+        className={`search-hint-btn${open ? ' active' : ''}`}
         onClick={() => setOpen(o => !o)}
         aria-label={open ? 'Close search help' : 'Search help'}
       >
@@ -49,19 +49,19 @@ export default function SearchHelp() {
       </button>
 
       {open && (
-        <div className="search-help-bubble" role="dialog" aria-label="Search tips">
-          <p className="search-help-title">{current.title}</p>
-          <p className="search-help-tip">{current.tip}</p>
-          <p className="search-help-examples-label">{current.examplesLabel}</p>
-          <ul className="search-help-examples">
+        <div className="search-hint-bubble" role="dialog" aria-label="Search tips">
+          <p className="search-hint-title">{current.title}</p>
+          <p className="search-hint-tip">{current.tip}</p>
+          <p className="search-hint-examples-label">{current.examplesLabel}</p>
+          <ul className="search-hint-examples">
             {current.examples.map((ex, i) => (
               <li key={i}>{ex}</li>
             ))}
           </ul>
           {current.note && (
-            <p className="search-help-note">{current.note}</p>
+            <p className="search-hint-note">{current.note}</p>
           )}
-          <div className="search-help-nav">
+          <div className="search-hint-nav">
             <button
               type="button"
               disabled={page === 0}

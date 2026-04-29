@@ -1,96 +1,96 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-import { changeDisplayName, changePassword, deleteAccount } from '../api/authApi'
+import { userAuth } from '../hooks/userAuth'
+import { changedName as apiChangedName, changePW as apiChangePW, deleteAcc as apiDeleteAcc } from '../api/authApi'
 import '../styles/account.css'
 
 function AccountPage() {
-  const { user, displayName, logout, updateDisplayName } = useAuth()
+  const { user, displayName, logout, updateDisplayName } = userAuth()
   const navigate = useNavigate()
 
-  const [newDisplayName, setNewDisplayName] = useState('')
-  const [displayNameMsg, setDisplayNameMsg] = useState(null)
-  const [displayNameError, setDisplayNameError] = useState(null)
-  const [displayNameLoading, setDisplayNameLoading] = useState(false)
+  const [dName, setdName] = useState('')
+  const [dNameMessage, setdNameMessage] = useState(null)
+  const [dNameError, setdNameError] = useState(null)
+  const [dNameLoad, setdNameLoad] = useState(false)
 
-  const [currentPassword, setCurrentPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [passwordMsg, setPasswordMsg] = useState(null)
-  const [passwordError, setPasswordError] = useState(null)
-  const [passwordLoading, setPasswordLoading] = useState(false)
+  const [curPW, setCurPW] = useState('')
+  const [newPW, setNewPW] = useState('')
+  const [pwMessage, setPWMessage] = useState(null)
+  const [pwError, setPWError] = useState(null)
+  const [pwLoad, setPWLoad] = useState(false)
 
-  const [deletePassword, setDeletePassword] = useState('')
-  const [deleteError, setDeleteError] = useState(null)
-  const [deleteLoading, setDeleteLoading] = useState(false)
-  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [pwDelete, setPWDelete] = useState('')
+  const [errorDelete, setErrorDelete] = useState(null)
+  const [deleteLoad, setDeleteLoad] = useState(false)
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false)
 
-  const handleChangeDisplayName = async (e) => {
+  const changedName = async (e) => {
     e.preventDefault()
-    setDisplayNameMsg(null)
-    setDisplayNameError(null)
-    const trimmed = newDisplayName.trim()
+    setdNameMessage(null)
+    setdNameError(null)
+    const trimmed = dName.trim()
     if (!trimmed) {
-      setDisplayNameError('Display name cannot be empty.')
+      setdNameError('please type the name you want.')
       return
     }
-    setDisplayNameLoading(true)
+    setdNameLoad(true)
     try {
-      const res = await changeDisplayName(user, trimmed)
+      const res = await apiChangedName(user, trimmed)
       updateDisplayName(res.display_name)
-      setNewDisplayName('')
-      setDisplayNameMsg('Display name updated successfully.')
-    } catch (err) {
-      setDisplayNameError(err.message)
+      setdName('')
+      setdNameMessage('Display name has been updated.')
+    } catch (error) {
+      setdNameError(error.message)
     } finally {
-      setDisplayNameLoading(false)
+      setdNameLoad(false)
     }
   }
 
-  const handleChangePassword = async (e) => {
+  const changePW = async (e) => {
     e.preventDefault()
-    setPasswordMsg(null)
-    setPasswordError(null)
-    if (!currentPassword) {
-      setPasswordError('Current password is required.')
+    setPWMessage(null)
+    setPWError(null)
+    if (!curPW) {
+      setPWError('Current password is required.')
       return
     }
-    if (!newPassword) {
-      setPasswordError('New password is required.')
+    if (!newPW) {
+      setPWError('New password is required.')
       return
     }
-    setPasswordLoading(true)
+    setPWLoad(true)
     try {
-      await changePassword(user, currentPassword, newPassword)
-      setCurrentPassword('')
-      setNewPassword('')
-      setPasswordMsg('Password updated successfully.')
-    } catch (err) {
-      setPasswordError(err.message)
+      await apiChangePW(user, curPW, newPW)
+      setCurPW('')
+      setNewPW('')
+      setPWMessage('Password updated successfully.')
+    } catch (error) {
+      setPWError(error.message)
     } finally {
-      setPasswordLoading(false)
+      setPWLoad(false)
     }
   }
 
-  const handleDeleteAccount = async () => {
-    if (!confirmDelete) {
-      setConfirmDelete(true)
+  const deleteAcc = async () => {
+    if (!deleteConfirmation) {
+      setDeleteConfirmation(true)
       return
     }
-    setDeleteError(null)
-    if (!deletePassword) {
-      setDeleteError('Password is required to delete your account.')
+    setErrorDelete(null)
+    if (!pwDelete) {
+      setErrorDelete('Password is required to delete your account.')
       return
     }
-    setDeleteLoading(true)
+    setDeleteLoad(true)
     try {
-      await deleteAccount(user, deletePassword)
+      await apiDeleteAcc(user, pwDelete)
       logout()
       navigate('/')
-    } catch (err) {
-      setDeleteError(err.message)
-      setConfirmDelete(false)
+    } catch (error) {
+      setErrorDelete(error.message)
+      setDeleteConfirmation(false)
     } finally {
-      setDeleteLoading(false)
+      setDeleteLoad(false)
     }
   }
 
@@ -107,46 +107,46 @@ function AccountPage() {
         <p className="account-section-note">
           This is the name shown in the app. Your login username (<strong>{user}</strong>) cannot be changed.
         </p>
-        <form onSubmit={handleChangeDisplayName} className="account-field-row">
+        <form onSubmit={changedName} className="account-field-row">
           <input
             type="text"
             placeholder={displayName}
-            value={newDisplayName}
-            onChange={e => setNewDisplayName(e.target.value)}
+            value={dName}
+            onChange={e => setdName(e.target.value)}
           />
-          <button type="submit" disabled={displayNameLoading}>
-            {displayNameLoading ? 'Saving…' : 'Confirm'}
+          <button type="submit" disabled={dNameLoad}>
+            {dNameLoad ? 'Saving…' : 'Confirm'}
           </button>
         </form>
-        {displayNameError && <p className="error">{displayNameError}</p>}
-        {displayNameMsg && <p className="success">{displayNameMsg}</p>}
+        {dNameError && <p className="error">{dNameError}</p>}
+        {dNameMessage && <p className="success">{dNameMessage}</p>}
       </section>
 
       <section className="account-section">
         <h2>Change Password</h2>
-        <form onSubmit={handleChangePassword} className="account-password-form">
+        <form onSubmit={changePW} className="account-password-form">
           <div className="account-field-row">
             <input
               type="password"
               placeholder="Current password"
-              value={currentPassword}
-              onChange={e => setCurrentPassword(e.target.value)}
+              value={curPW}
+              onChange={e => setCurPW(e.target.value)}
             />
           </div>
           <div className="account-field-row">
             <input
               type="password"
               placeholder="New password"
-              value={newPassword}
-              onChange={e => setNewPassword(e.target.value)}
+              value={newPW}
+              onChange={e => setNewPW(e.target.value)}
             />
-            <button type="submit" disabled={passwordLoading}>
-              {passwordLoading ? 'Saving…' : 'Confirm'}
+            <button type="submit" disabled={pwLoad}>
+              {pwLoad ? 'Saving…' : 'Confirm'}
             </button>
           </div>
         </form>
-        {passwordError && <p className="error">{passwordError}</p>}
-        {passwordMsg && <p className="success">{passwordMsg}</p>}
+        {pwError && <p className="error">{pwError}</p>}
+        {pwMessage && <p className="success">{pwMessage}</p>}
       </section>
 
       <section className="account-section account-danger-zone">
@@ -158,25 +158,25 @@ function AccountPage() {
               <span>Permanently deletes your account and all data. This cannot be undone.</span>
             </div>
             <div className="account-danger-delete">
-              {confirmDelete && (
+              {deleteConfirmation && (
                 <input
                   type="password"
                   placeholder="Confirm password"
-                  value={deletePassword}
-                  onChange={e => setDeletePassword(e.target.value)}
+                  value={pwDelete}
+                  onChange={e => setPWDelete(e.target.value)}
                 />
               )}
               <button
                 className="btn-danger"
-                onClick={handleDeleteAccount}
-                disabled={deleteLoading}
+                onClick={deleteAcc}
+                disabled={deleteLoad}
               >
-                {deleteLoading ? 'Deleting…' : confirmDelete ? 'Confirm Delete' : 'Terminate Account'}
+                {deleteLoad ? 'Deleting…' : deleteConfirmation ? 'Confirm Delete' : 'Terminate Account'}
               </button>
             </div>
           </div>
-          {deleteError && <p className="error">{deleteError}</p>}
-          {confirmDelete && !deleteLoading && (
+          {errorDelete && <p className="error">{errorDelete}</p>}
+          {deleteConfirmation && !deleteLoad && (
             <p className="account-danger-warning">
               This will permanently delete your account. Enter your password and click Confirm Delete.
             </p>

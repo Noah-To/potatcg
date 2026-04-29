@@ -8,10 +8,10 @@ def get(username: str) -> list:
 def add(username: str, card: dict) -> list:
     collection = user_service.get_collection(username)
 
-    existing = next((c for c in collection if c["id"] == card["id"]), None)
+    card_In_Col = next((c for c in collection if c["id"] == card["id"]), None)
 
-    if existing:
-        existing["quantity"] += 1
+    if card_In_Col:
+        card_In_Col["quantity"] += 1
     else:
         card["quantity"] = 1
         collection.append(card)

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import CardItem from '../components/CardItem'
-import SetItem from '../components/SetItem'
+import Card from '../components/CardItem'
+import Set from '../components/SetItem'
 import SearchBar from '../components/SearchBar'
 import ErrorMessage from '../components/ErrorMessage'
-import ActionButton from '../components/ActionButton'
-import { useAuth } from '../hooks/useAuth'
-import { useCards } from '../hooks/useCards'
+import Button from '../components/ActionButton'
+import { userAuth } from '../hooks/userAuth'
+import { userCards } from '../hooks/userCards'
 import { useSets } from '../hooks/useSets'
 import { addCard } from '../api/collectionApi'
 import '../styles/cards.css'
@@ -20,10 +20,10 @@ function BrowsePage() {
   //global search is when user searches for a pokemon without selecting the set
   const [globalSearch, setGlobalSearch] = useState(false)
   const [searchError, setSearchError] = useState(null)
-  const isCompoundSearch = useRef(false)
+  const isConbinedSearch = useRef(false)
 
-  const { user } = useAuth()
-  const { cards, totalCount, loading: cardsLoading, error: cardsError, search: searchCards } = useCards()
+  const { user } = userAuth()
+  const { cards, totalCount, loading: cardsLoading, error: cardsError, search: searchCards } = userCards()
   const { sets, totalCount: setsTotalCount, loading: setsLoading, error: setsError, search: searchSets } = useSets()
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function BrowsePage() {
 
   // checking for compounded search before handling other types of seearches
   useEffect(() => {
-    if (!cardsLoading && isCompoundSearch.current) {
+    if (!cardsLoading && isConbinedSearch.current) {
       if (cards.length === 0) {
         setSearchError("Make sure you don't have a typo! Check the set and the name of the Pokémon!")
       } else {
@@ -46,7 +46,7 @@ function BrowsePage() {
     const trimmed = query.trim()
     setPage(1)
     setSearchError(null)
-    isCompoundSearch.current = false
+    isConbinedSearch.current = false
 
     if (selectedSet) {
       searchCards(trimmed, selectedSet.id, 1)
@@ -64,7 +64,7 @@ function BrowsePage() {
     // name or set name are in the same search string
     const compound = parseCompoundQuery(trimmed, sets)
     if (compound) {
-      isCompoundSearch.current = true
+      isConbinedSearch.current = true
       setSelectedSet(compound.set)
       setQuery('')
       setPage(1)
@@ -88,7 +88,7 @@ function BrowsePage() {
     setSelectedSet(null)
     setGlobalSearch(false)
     setSearchError(null)
-    isCompoundSearch.current = false
+    isConbinedSearch.current = false
     setQuery('')
     setPage(1)
     setSetsPage(1)
@@ -150,9 +150,9 @@ function BrowsePage() {
         />
 
         {selectedSet && (
-          <ActionButton variant="secondary" onClick={handleBackToSets}>
+          <Button variant="secondary" onClick={handleBackToSets}>
             Back to sets
-          </ActionButton>
+          </Button>
         )}
       </div>
 
@@ -163,18 +163,18 @@ function BrowsePage() {
         <>
           <div className="cards-grid">
             {sets.map(set => (
-              <SetItem key={set.id} set={set} onClick={handleSetClick} />
+              <Set key={set.id} set={set} onClick={handleSetClick} />
             ))}
           </div>
           {setsTotalCount > 20 && (
             <div className="pagination-row">
-              <ActionButton variant="secondary" onClick={handleSetsPrevPage} disabled={setsPage === 1}>
+              <Button variant="secondary" onClick={handleSetsPrevPage} disabled={setsPage === 1}>
                 Previous
-              </ActionButton>
+              </Button>
               <span>Page {setsPage}</span>
-              <ActionButton variant="secondary" onClick={handleSetsNextPage} disabled={setsPage * 20 >= setsTotalCount}>
+              <Button variant="secondary" onClick={handleSetsNextPage} disabled={setsPage * 20 >= setsTotalCount}>
                 Next
-              </ActionButton>
+              </Button>
             </div>
           )}
         </>
@@ -187,7 +187,7 @@ function BrowsePage() {
               <h3 className="search-section-heading">Sets</h3>
               <div className="cards-grid">
                 {sets.map(set => (
-                  <SetItem key={set.id} set={set} onClick={handleSetClick} />
+                  <Set key={set.id} set={set} onClick={handleSetClick} />
                 ))}
               </div>
             </>
@@ -195,7 +195,7 @@ function BrowsePage() {
           <h3 className="search-section-heading">Cards</h3>
           <div className="cards-grid">
             {cards.map(card => (
-              <CardItem
+              <Card
                 key={card.id}
                 card={card}
                 onAction={() => handleAdd(card)}
@@ -210,7 +210,7 @@ function BrowsePage() {
       {selectedSet && (
         <div className="cards-grid">
           {cards.map(card => (
-            <CardItem
+            <Card
               key={card.id}
               card={card}
               onAction={() => handleAdd(card)}
@@ -222,13 +222,13 @@ function BrowsePage() {
 
       {(selectedSet || globalSearch) && (
         <div className="pagination-row">
-          <ActionButton variant="secondary" onClick={handlePrevPage} disabled={page === 1}>
+          <Button variant="secondary" onClick={handlePrevPage} disabled={page === 1}>
             Previous
-          </ActionButton>
+          </Button>
           <span>Page {page}</span>
-          <ActionButton variant="secondary" onClick={handleNextPage} disabled={page * 20 >= totalCount}>
+          <Button variant="secondary" onClick={handleNextPage} disabled={page * 20 >= totalCount}>
             Next
-          </ActionButton>
+          </Button>
         </div>
       )}
     </div>

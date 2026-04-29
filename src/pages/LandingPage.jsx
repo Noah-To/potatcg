@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { userAuth } from '../hooks/userAuth'
 import '../styles/forms.css'
 
 function LandingPage() {
-  const { user } = useAuth()
+  const { user } = userAuth()
   const navigate = useNavigate()
 
   useEffect(() => {

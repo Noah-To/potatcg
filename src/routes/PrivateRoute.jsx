@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import { useAuth } from '../hooks/useAuth'
+import { userAuth } from '../hooks/userAuth'
 
 function PrivateRoute() {
-  const { user } = useAuth()
+  const { user } = userAuth()
 
   if (!user) {
     return <Navigate to="/" replace />

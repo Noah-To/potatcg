@@ -2,7 +2,7 @@ export const BACKEND = 'http://localhost:3001'
 
 const cache = new Map()
 
-export async function fetchWithCache(key, url) {
+export async function cacheFetch(key, url) {
   if (cache.has(key)) return cache.get(key)
 
 // cancel request if it takes a minute to respond, catches this by throwing error
@@ -16,7 +16,7 @@ export async function fetchWithCache(key, url) {
     cache.set(key, data)
     return data
   } catch (err) {
-    if (err.name === 'AbortError') throw new Error('Request timed out')
+    if (err.name === 'abort error') throw new Error('Request timed out')
     throw err
   } finally {
     clearTimeout(timeout)

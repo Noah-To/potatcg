@@ -1,8 +1,8 @@
-function ActionButton({ onClick, disabled, variant = 'primary', type = 'button', children }) {
+function Button({ onClick, disabled, variant = 'primary', type = 'button', children }) {
   return (
     <button
       type={type}
-      className={`action-button action-button--${variant}`}
+      className={`button button--${variant}`}
       onClick={onClick}
       disabled={disabled}
     >
@@ -11,4 +11,4 @@ function ActionButton({ onClick, disabled, variant = 'primary', type = 'button',
   )
 }
 
-export default ActionButton
+export default Button

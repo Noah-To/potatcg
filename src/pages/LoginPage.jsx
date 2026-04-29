@@ -1,36 +1,36 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { userAuth } from '../hooks/userAuth'
 import { loginUser } from '../api/authApi'
 import '../styles/forms.css'
 
 function LoginPage() {
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const [pw, setPW] = useState('')
+  const [showPW, setShowPW] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const { login } = useAuth()
+  const { login } = userAuth()
   const navigate = useNavigate()
 
-  const handleLogin = async (e) => {
+  const Login = async (e) => {
     e.preventDefault()
     if (loading) return
 
     const trimmed = username.trim()
     if (!trimmed) { setError('Please enter a username.'); return }
-    if (!password) { setError('Please enter a password.'); return }
+    if (!pw) { setError('Please enter a password.'); return }
 
     setLoading(true)
     setError(null)
 
     try {
-      const data = await loginUser(trimmed, password)
+      const data = await loginUser(trimmed, pw)
       login(data.username, data.display_name)
       navigate('/browse')
-    } catch (err) {
-      setError(err.message || 'Could not connect to server.')
+    } catch (error) {
+      setError(error.message || 'Could not connect to server.')
     } finally {
       setLoading(false)
     }
@@ -41,7 +41,7 @@ function LoginPage() {
       <h1>PotaTCG</h1>
       <p>Your Pokémon TCG collection tracker</p>
 
-      <form onSubmit={handleLogin} className="login-form">
+      <form onSubmit={Login} className="login-form">
         <input
           type="text"
           placeholder="Username"
@@ -54,20 +54,20 @@ function LoginPage() {
         <div className="password-row">
           <div className="password-input-wrap">
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPW ? 'text' : 'password'}
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={pw}
+              onChange={(e) => setPW(e.target.value)}
               disabled={loading}
               required
             />
             <button
               type="button"
               className="pw-show-btn"
-              onClick={() => setShowPassword(v => !v)}
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              onClick={() => setShowPW(v => !v)}
+              aria-label={showPW ? 'Hide password' : 'Show password'}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPW ? 'Hide' : 'Show'}
             </button>
           </div>
         </div>

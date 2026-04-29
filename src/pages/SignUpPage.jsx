@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { userAuth } from '../hooks/userAuth'
 import { registerUser } from '../api/authApi'
 import '../styles/forms.css'
 
 // password must be at least 12 chars, 1 uppercase, 1 number, 1 symbol, no whitespace
 // a regex to check 
-const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{12,}$/
+const pw_REGEX = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{12,}$/
 
 function SignUpPage() {
   const [username, setUsername] = useState('')
@@ -17,7 +17,7 @@ function SignUpPage() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const { login } = useAuth()
+  const { login } = userAuth()
   const navigate = useNavigate()
 
   // handle the login, validating the password with regex and 
@@ -29,7 +29,7 @@ function SignUpPage() {
 
     const trimmed = username.trim()
     if (!trimmed) { setError('Please enter a username.'); return }
-    if (!PASSWORD_REGEX.test(password)) {
+    if (!pw_REGEX.test(password)) {
       setError('Password does not meet the requirements.')
       return
     }
@@ -42,8 +42,8 @@ function SignUpPage() {
       const data = await registerUser(trimmed, password, trimmedDisplay)
       login(data.username, data.display_name)
       navigate('/browse')
-    } catch (err) {
-      setError(err.message || 'Could not connect to server.')
+    } catch (error) {
+      setError(error.message || 'Could not connect to server.')
     } finally {
       setLoading(false)
     }

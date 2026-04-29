@@ -1,4 +1,4 @@
-import { BACKEND, fetchWithCache } from './config'
+import { BACKEND, cacheFetch } from './config'
 
 export async function searchCards(q = '', setId = '', page = 1) {
   const trimmedQ = q.trim()
@@ -9,6 +9,6 @@ export async function searchCards(q = '', setId = '', page = 1) {
   if (trimmedQ) url += `&q=${encodeURIComponent(trimmedQ)}`
   if (trimmedSetId) url += `&setId=${encodeURIComponent(trimmedSetId)}`
 
-  const data = await fetchWithCache(key, url)
+  const data = await cacheFetch(key, url)
   return { cards: data.data ?? [], totalCount: data.totalCount ?? 0 }
 }

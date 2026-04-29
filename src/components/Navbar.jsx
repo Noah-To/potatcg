@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { userAuth } from '../hooks/userAuth'
 import '../styles/navbar.css'
 
 function Navbar() {
-  const { displayName, logout } = useAuth()
+  const { displayName, logout } = userAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {

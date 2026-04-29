@@ -1,13 +1,13 @@
-import { useAuth } from '../hooks/useAuth'
-import { useCollection } from '../hooks/useCollection'
+import { userAuth } from '../hooks/userAuth'
+import { userCollection } from '../hooks/userCollection'
 import LoadingState from '../components/LoadingState'
 import ErrorMessage from '../components/ErrorMessage'
-import ActionButton from '../components/ActionButton'
+import Button from '../components/ActionButton'
 import '../styles/cards.css'
 
 function CollectionPage() {
-  const { user } = useAuth()
-  const { cards, loading, error, add, remove } = useCollection(user)
+  const { user } = userAuth()
+  const { cards, loading, error, add, remove } = userCollection(user)
   const totalCards = cards.reduce((sum, card) => sum + (card.quantity ?? 1), 0)
 
   if (loading) return <LoadingState />
@@ -22,14 +22,14 @@ function CollectionPage() {
       ) : (
         <div className="cards-grid">
           {cards.map(card => (
-            <div key={card.id} className="card-item">
+            <div key={card.id} className="card">
               <img src={card.image} alt={card.name} />
               <p>{card.name} <span className="qty-badge">x{card.quantity ?? 1}</span></p>
                <small>{card.set_name}</small>
 
           <div className="card-actions">
-            <ActionButton variant="primary" onClick={() => add(card)}>+1</ActionButton>
-            <ActionButton variant="danger" onClick={() => remove(card.id)}>-1</ActionButton>
+            <Button variant="primary" onClick={() => add(card)}>+1</Button>
+            <Button variant="danger" onClick={() => remove(card.id)}>-1</Button>
           </div>
         </div>
           ))}

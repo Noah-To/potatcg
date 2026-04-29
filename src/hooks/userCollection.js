@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { getCollection, addCard, removeCard } from '../api/collectionApi'
 
-export function useCollection(username) {
+export function userCollection(username) {
   const [cards, setCards] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -19,8 +19,8 @@ export function useCollection(username) {
     getCollection(username)
       .then(setCards)
    
-      .catch((err) => {
-        console.error('Failed to load collection:', err)
+      .catch((error) => {
+        console.error('Failed to load collection:', error)
         setError('Could not load your collection.')
       })
       .finally(() => setLoading(false))
@@ -34,8 +34,8 @@ export function useCollection(username) {
     try {
       const updated = await addCard(username, card)
       setCards(updated)
-    } catch (err) {
-      console.error('Add failed:', err)
+    } catch (error) {
+      console.error('Add failed:', error)
       setError('Failed to add card. Please try again.')
     } finally {
       busy.current = false
@@ -48,8 +48,8 @@ export function useCollection(username) {
     try {
       const updated = await removeCard(username, cardId)
       setCards(updated)
-    } catch (err) {
-      console.error('Remove failed:', err)
+    } catch (error) {
+      console.error('Remove failed:', error)
       setError('Failed to remove card. Please try again.')
     } finally {
       busy.current = false

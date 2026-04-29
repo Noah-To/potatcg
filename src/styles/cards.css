@@ -16,36 +16,36 @@
   width: 100%;
 }
 
-.card-item {
+.card {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
 }
 
-.card-item img {
+.card img {
   width: 150px;
   max-width: 100%;
   border-radius: 8px;
   transition: transform 0.2s;
 }
 
-.card-item img:hover {
+.card img:hover {
   transform: scale(1.06);
 }
 
-.card-item p {
+.card p {
   margin: 0;
   font-size: 0.85rem;
   font-weight: 600;
 }
 
-.card-item small {
+.card small {
   color: #888;
   font-size: 0.75rem;
 }
 
-.set-card {
+.set {
   width: 220px;
   min-height: 260px;
   padding: 1rem;
@@ -62,7 +62,7 @@
   box-sizing: border-box;
 }
 
-.set-card-image {
+.set-image {
   width: 100%;
   height: 110px;
   display: flex;
@@ -72,7 +72,7 @@
   margin-bottom: 1rem;
 }
 
-.set-card-image img {
+.set-image img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -81,23 +81,23 @@
   object-fit: contain;
 }
 
-.set-card-body {
+.set-body {
   text-align: center;
 }
 
-.set-card-body p {
+.set-body p {
   margin: 0 0 0.4rem 0;
   font-size: 0.95rem;
   font-weight: 700;
 }
 
-.set-card-body small {
+.set-body small {
   display: block;
   margin-bottom: 0.35rem;
   color: #ccc;
 }
 
-.action-button {
+.button {
   padding: 0.3rem 0.8rem;
   font-size: 0.78rem;
   border-radius: 4px;
@@ -106,42 +106,42 @@
   border: none;
 }
 
-.action-button:disabled {
+.button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
 /* primary — yellow, main actions (+1, + Collection) */
-.action-button--primary {
+.button--primary {
   background: #f5c518;
   color: #000;
   border: none;
 }
 
-.action-button--primary:hover:not(:disabled) {
+.button--primary:hover:not(:disabled) {
   background: #e6b800;
 }
 
 /* danger — red outlined, destructive (-1, remove) */
-.action-button--danger {
+.button--danger {
   background: transparent;
   color: #ff6b6b;
   border: 1px solid #ff6b6b;
 }
 
-.action-button--danger:hover:not(:disabled) {
+.button--danger:hover:not(:disabled) {
   background: #ff6b6b;
   color: #000;
 }
 
 /* secondary — neutral outlined, navigation (prev/next, back) */
-.action-button--secondary {
+.button--secondary {
   background: transparent;
   color: #ccc;
   border: 1px solid #555;
 }
 
-.action-button--secondary:hover:not(:disabled) {
+.button--secondary:hover:not(:disabled) {
   border-color: #f5c518;
   color: #f5c518;
 }
@@ -163,16 +163,16 @@
     grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
   }
 
-  .set-card {
+  .set {
     width: 180px;
     min-height: 240px;
   }
 
-  .set-card-image {
+  .set-image {
     height: 90px;
   }
 
-  .card-item img {
+  .card img {
     width: 130px;
   }
 }

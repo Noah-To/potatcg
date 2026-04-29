@@ -8,26 +8,26 @@ export function useSets() {
   const [totalCount, setTotalCount] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const latestRequestRef = useRef(0)
+  const lastRequestRef = useRef(0)
 
   const search = useCallback(async (q = '', page = 1) => {
-    const requestId = ++latestRequestRef.current
+    const requestId = ++lastRequestRef.current
 
     setLoading(true)
     setError(null)
 
     try {
       const data = await searchSets(q, page)
-      if (requestId === latestRequestRef.current) {
+      if (requestId === lastRequestRef.current) {
         setSets(data.sets)
         setTotalCount(data.totalCount)
       }
-    } catch (err) {
-      if (requestId === latestRequestRef.current) {
-        setError(`Failed to load sets. ${err.message}`)
+    } catch (error) {
+      if (requestId === lastRequestRef.current) {
+        setError(`Failed to load sets. ${error.message}`)
       }
     } finally {
-      if (requestId === latestRequestRef.current) {
+      if (requestId === lastRequestRef.current) {
         setLoading(false)
       }
     }

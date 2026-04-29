@@ -6,19 +6,19 @@ async def fetch_cards(q: str = "", page_size: int = 20, page: int = 1, set_id: s
     cleaned_q = q.strip()
     url = f"{TCG_API_BASE}/cards?pageSize={page_size}&page={page}"
 
-    query_parts = []
+    part_query = []
 
     if set_id:
-        query_parts.append(f'set.id:"{set_id}"')
+        part_query.append(f'set.id:"{set_id}"')
 
     if cleaned_q:
-        query_parts.append(
+        part_query.append(
             f'(name:"{cleaned_q}*" OR set.name:"{cleaned_q}*")'
         )
 
-    if query_parts:
-        full_query = " AND ".join(query_parts)
-        url += f"&q={quote(full_query)}"
+    if part_query:
+        total_query = " AND ".join(part_query)
+        url += f"&q={quote(total_query)}"
 
     headers = {"X-Api-Key": TCG_API_KEY} if TCG_API_KEY else {}
 
