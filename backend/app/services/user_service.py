@@ -7,7 +7,8 @@ import secrets
 # simple and easy to manage in small scale, but hardly scalable
 DATA_FILE = os.path.join(os.path.dirname(__file__), '..', '..', 'users.json')
 
-# functions that can alter user data, (saving the collection, getting the data etc)
+# functions that can alter user data are listed below, including account managing
+# including changing display name and register user
 def load() -> dict:
     if not os.path.exists(DATA_FILE):
         return {}

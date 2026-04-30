@@ -2,6 +2,7 @@ import httpx
 from urllib.parse import quote
 from app.core.config import TCG_API_KEY, TCG_API_BASE
 
+# get the card data such as the card id, set name and pokemon name from the API server, throwing a timeout if the client side took too long to load
 async def fetch_cards(q: str = "", page_size: int = 20, page: int = 1, set_id: str | None = None) -> dict:
     cleaned_q = q.strip()
     url = f"{TCG_API_BASE}/cards?pageSize={page_size}&page={page}"
@@ -27,7 +28,7 @@ async def fetch_cards(q: str = "", page_size: int = 20, page: int = 1, set_id: s
         res.raise_for_status()
         return res.json()
 
-
+# get teh set data using a request to the API server, also throwing a timeout if the client side took too long to load
 async def fetch_sets(q: str = "", page_size: int = 20, page: int = 1) -> dict:
     url = f"{TCG_API_BASE}/sets?pageSize={page_size}&page={page}&orderBy=-releaseDate"
 
